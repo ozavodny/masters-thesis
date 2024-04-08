@@ -1,0 +1,23 @@
+@startuml
+left to right direction
+:New User: --> (Authenticate)
+:New User: ---> (List all templates)
+:New User: ---> (Use a template)
+:New User: ---> (Import an image)
+:New User: ---> (Modify a text in a template)
+:New User: ---> (Modify an image in a template)
+:New User: ---> (Export a meme)
+
+(List all templates) <--- :Authenticated User:
+(Import an image) <--- :Authenticated User:
+(Use a template) <--- :Authenticated User:
+(Modify a text in a template) <--- :Authenticated User:
+(Modify an image in a template) <--- :Authenticated User:
+(Export a meme) <--- :Authenticated User:
+(Save a template) <-- :Authenticated User:
+(Share a meme) <-- :Authenticated User:
+(List exported memes) <-- :Authenticated User:
+(Remove a meme) <-- :Authenticated User:
+(Remove a template) <-- :Authenticated User:
+
+@enduml

@@ -1,0 +1,14 @@
+version: '3.1'
+services:
+  texlive:
+    container_name: latex
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - './:/thesis'
+    networks:
+      - main
+    command: ['/bin/bash', '/thesis/reload.bash']
+networks:
+  main:

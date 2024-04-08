@@ -1,0 +1,4 @@
+{
+    "editor.wordWrap": "on",
+    "latex-workshop.latex.autoBuild.run": "never"
+}

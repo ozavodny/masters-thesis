@@ -1,0 +1,33 @@
+name: Build thesis PDF
+
+on:
+  push:
+    paths:
+      - thesis/**
+      - .github/workflows/build-thesis.yml
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Compile thesis files to PDF
+    runs-on: ubuntu-latest
+    container:
+      image: texlive/texlive:latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+
+      - name: Compile
+        run: latexmk -c ctufit-thesis.tex
+        working-directory: ./thesis
+
+      - name: Export pdf
+        run: latexmk -pdfxe ctufit-thesis.tex
+        working-directory: ./thesis
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: thesis
+          path: ./thesis/ctufit-thesis.pdf

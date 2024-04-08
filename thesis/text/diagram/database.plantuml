@@ -1,0 +1,117 @@
+@startuml
+
+skinparam linetype ortho
+
+entity Image {
+  * id: String
+  * fileName: String
+  template: Template?
+  meme: Meme?
+  templateImage: TemplateImage?
+}
+
+entity TemplateText {
+  * id: String
+  * templateId: String
+  * template: Template
+  * x: Float
+  * y: Float
+  * fontSize: Float
+  * color: String
+  * strokeColor: String
+  * width: Float
+  * height: Float
+  * text: String
+  * scale: Float
+  * rotation: Float
+  * zIndex: Int
+}
+
+entity TemplateImage {
+  * id: String
+  * templateId: String
+  * template: Template
+  * x: Float
+  * y: Float
+  * width: Float
+  * height: Float
+  * scale: Float
+  * rotation: Float
+  * image: Image
+  * imageId: String
+  * zIndex: Int
+}
+
+entity Template {
+  * id: String
+  * texts: TemplateText[]
+  * images: TemplateImage[]
+  * name: String
+  * isPublic: Boolean
+  * imageId: String
+  * image: Image
+  * userId: String
+  * user: User
+}
+
+entity Meme {
+  * id: String
+  * userId: String
+  * user: User
+  * imageId: String
+  * image: Image
+}
+
+entity Account {
+  * id: String
+  * userId: String
+  * type: String
+  * provider: String
+  * providerAccountId: String
+  refresh_token: String?
+  access_token: String?
+  expires_at: BigInt?
+  token_type: String?
+  scope: String?
+  id_token: String?
+  session_state: String?
+  * user: User
+}
+
+entity Session {
+  * id: String
+  * sessionToken: String
+  * userId: String
+  * expires: DateTime
+  * user: User
+}
+
+entity User {
+  * id: String
+  name: String?
+  email: String?
+  emailVerified: DateTime?
+  image: String?
+  * accounts: Account[]
+  * sessions: Session[]
+  * memeTemplates: Template[]
+  * memes: Meme[]
+}
+
+entity VerificationToken {
+  * identifier: String
+  * token: String
+  * expires: DateTime
+}
+
+Image ||..o| Template
+TemplateText }|..|| Template
+TemplateImage }|..|| Template
+Image ||..o| TemplateImage
+Image ||..o| Meme
+Account }|..|| User
+Session }|..|| User
+Template }|..|| User
+Meme }|..|| User
+
+@enduml

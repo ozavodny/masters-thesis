@@ -1,0 +1,31 @@
+version: '3.1'
+services:
+  # caddy is used as the reverse proxy
+  caddy:
+    container_name: memebro-caddy
+    image: caddy:latest
+    volumes:
+      # map the Caddyfile from the host file system into the docker container
+      - './Caddyfile:/etc/caddy/Caddyfile'
+    ports:
+      # expose ports 80 and 443 for http/https communication
+      - '80:80'
+      - '443:443'
+    # containers need to be on the same network to see each other
+    networks:
+      - main
+  app:
+    container_name: masters-app
+    image: docker.io/ozavodny/masters-thesis:main
+    networks:
+      - main
+    volumes:
+      # map the volume for image storage
+      - [PATH_TO_IMAGES]:/images
+    environment:
+      # set the application configuration
+      - PORT=3000
+      - DATABASE_URL=file:./db.sqlite
+      ...
+networks:
+  main:

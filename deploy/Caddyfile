@@ -1,0 +1,3 @@
+diplomka.zavodny.net {
+    reverse_proxy memebro-app:3000
+}
