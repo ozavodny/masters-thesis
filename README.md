@@ -1,6 +1,6 @@
 ﻿# Ondrej Zavodny Masters Thesis
 
-Welcome to the repository containing my master's thesis. It was done at the Czech Technical University - Faculty of Informatics. The finished application is available [here](https://diplomka.zavodny.net).
+Welcome to the repository containing my master's thesis. It was done at the Czech Technical University - Faculty of Informatics.
 
 ## Text
 
